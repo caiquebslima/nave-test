@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField, Button } from '@material-ui/core/';
 
 import NaveLogo from '../assets/NaveLogo';
@@ -6,9 +6,19 @@ import '../styles/login-page.scss';
 
 // TODO: apply correct type to function component
 const LoginPage: React.FC<any> = () => {
+  const [state, setState] = useState({ email: '', password: '' });
+
+  const handleChange = (e: any) => {
+    const { id, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log('form submitted!');
+    console.log(state);
   };
 
   return (
@@ -19,18 +29,22 @@ const LoginPage: React.FC<any> = () => {
         </figure>
         <form onSubmit={handleSubmit}>
           <TextField
+            value={state.email}
             id='email'
             label='E-mail'
             variant='outlined'
             className='input-spacing'
             fullWidth={true}
+            onChange={handleChange}
           />
           <TextField
+            value={state.password}
             id='password'
             label='Senha'
             variant='outlined'
             className='input-spacing'
             fullWidth={true}
+            onChange={handleChange}
           />
           <Button
             type='submit'
