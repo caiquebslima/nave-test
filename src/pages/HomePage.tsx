@@ -1,13 +1,18 @@
 import { Button } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Header from '../components/Header';
 import Card from '../components/Card';
 import { sampleData } from '../components/sampleData';
 
 import '../styles/home-page.scss';
+import { APIService, UserResponse } from '../library';
 
 const HomePage: React.FC<any> = () => {
+  const [users, setUsers] = useState([]);
+  APIService.getUsers().then((res) => {
+    setUsers(res.data);
+  });
   return (
     <React.Fragment>
       <Header />
@@ -19,9 +24,13 @@ const HomePage: React.FC<any> = () => {
           </Button>
         </section>
         <section className='people__cards row'>
-          {sampleData.map((person) => {
+          {users.map((person: UserResponse) => {
             return (
-              <Card name={person.name} job={person.job} photo={person.photo} />
+              <Card
+                name={person.name}
+                job={person.job_role}
+                photo={person.url}
+              />
             );
           })}
         </section>
