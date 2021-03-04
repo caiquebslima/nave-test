@@ -3,19 +3,29 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
+import AddPage from './pages/AddPage';
 import './styles/app.scss';
 
 function App() {
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(
+  //     setUser({
+  //       id: "01",
+  //       email: "mats.vilas@gmail.com",
+  //       token: "1111",
+  //     })
+  //   );
+  // }, []);
+
   return (
     <Router>
       <div className='App'>
         <Switch>
-          <Route path='/login'>
-            <LoginPage />
-          </Route>
-          <Route path='/'>
-            <HomePage />
-          </Route>
+          <Route exact path='/' component={HomePage} />
+          <Route exact path='/login' component={LoginPage} />
+          <Route exact path='/add' component={AddPage} />
         </Switch>
       </div>
     </Router>
