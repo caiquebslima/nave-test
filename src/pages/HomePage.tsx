@@ -1,9 +1,8 @@
 import { Button } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import Header from '../components/Header';
 import Card from '../components/Card';
-import { sampleData } from '../components/sampleData';
 
 import '../styles/home-page.scss';
 import { APIService, UserResponse } from '../library';
