@@ -1,22 +1,32 @@
-import { Button } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Button, Modal } from '@material-ui/core';
 
-import Header from '../components/Header';
-import Card from '../components/Card';
-
+import { Header, Card } from '../components';
 import '../styles/home-page.scss';
 import { APIService, UserResponse } from '../library';
 
 const HomePage: React.FC<any> = () => {
   const [users, setUsers] = useState([]);
-  APIService.getUsers().then((res) => {
-    setUsers(res.data);
-  });
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  useEffect(() => {
+    APIService.getUsers().then((res) => {
+      setUsers(res.data);
+    });
+  }, []);
+
   return (
     <React.Fragment>
       <Header />
       <main className='people'>
-        <section className='people__action-bar'>
+        <section className='people__action-bar mb-4'>
           <h2>Navers</h2>
           <Button variant='contained' className='nave-button'>
             Adicionar Naver
@@ -25,11 +35,22 @@ const HomePage: React.FC<any> = () => {
         <section className='people__cards row'>
           {users.map((person: UserResponse) => {
             return (
-              <Card
-                name={person.name}
-                job={person.job_role}
-                photo={person.url}
-              />
+              <React.Fragment>
+                <button className='card-button' onClick={handleOpen}>
+                  <Card
+                    name={person.name}
+                    job={person.job_role}
+                    photo={person.url}
+                  />
+                </button>
+                <Modal open={open} onClose={handleClose}>
+                  <Card
+                    name={person.name}
+                    job={person.job_role}
+                    photo={person.url}
+                  />
+                </Modal>
+              </React.Fragment>
             );
           })}
         </section>
