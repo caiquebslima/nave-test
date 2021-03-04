@@ -1,7 +1,7 @@
 import React from 'react';
 import { Delete, Edit } from '@material-ui/icons';
 
-import '../styles/card.scss';
+import './card.scss';
 
 interface CardInterface {
   name: string;
@@ -11,7 +11,7 @@ interface CardInterface {
 
 const Card: React.FC<CardInterface> = ({ photo, name, job }: CardInterface) => {
   return (
-    <article className='people-card col-lg-3'>
+    <article className='people-card'>
       <figure className='people-card__image'>
         <img src={photo} alt={name} />
       </figure>
@@ -27,4 +27,4 @@ const Card: React.FC<CardInterface> = ({ photo, name, job }: CardInterface) => {
   );
 };
 
-export default Card;
+export { Card };

@@ -54,4 +54,4 @@ const NaveLogo: React.FC<any> = (): JSX.Element => {
   );
 };
 
-export default NaveLogo;
+export { NaveLogo };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button } from '@material-ui/core/';
 
-import NaveLogo from '../assets/NaveLogo';
+import { NaveLogo } from '../assets';
 import '../styles/login-page.scss';
 
 // TODO: apply correct type to function component

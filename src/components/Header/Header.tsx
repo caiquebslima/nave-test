@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 
-import NaveLogo from '../assets/NaveLogo';
-import '../styles/header.scss';
+import { NaveLogo } from '../../assets';
+import './header.scss';
 
 const Header: React.FC<any> = () => {
   return (
@@ -15,4 +15,4 @@ const Header: React.FC<any> = () => {
   );
 };
 
-export default Header;
+export { Header };

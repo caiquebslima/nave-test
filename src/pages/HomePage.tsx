@@ -36,7 +36,7 @@ const HomePage: React.FC<any> = () => {
           {users.map((person: UserResponse) => {
             return (
               <React.Fragment>
-                <button className='card-button' onClick={handleOpen}>
+                <button className='card-button col-lg-3' onClick={handleOpen}>
                   <Card
                     name={person.name}
                     job={person.job_role}
