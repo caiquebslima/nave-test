@@ -3,14 +3,17 @@ import { Button } from '@material-ui/core';
 
 import { NaveLogo } from '../../assets';
 import './header.scss';
+import { Link } from 'react-router-dom';
 
 const Header: React.FC<any> = () => {
   return (
     <header>
       <figure className='header-element-spacing'>
-        <NaveLogo />
+        <Link to='/'>
+          <NaveLogo />
+        </Link>
       </figure>
-      <Button className='header-element-spacing'>Sair</Button>
+      <Button className='header-element-spacing logout-button'>Sair</Button>
     </header>
   );
 };

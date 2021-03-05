@@ -9,9 +9,37 @@ figure {
   padding: 0;
   box-sizing: border-box;
 }
+a {
+  color: inherit;
+  background: inherit;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  &:hover {
+    color: inherit;
+  }
+}
+a.nave-button {
+  background: #000;
+  color: #fff;
+  &:hover {
+    background: #000;
+    color: #fff;
+  }
+}
 
 .invisible-button {
   background-color: inherit;
   border: none;
   cursor: pointer;
+}
+
+.nave-button {
+  padding: 0.5rem 4rem;
+  font-size: 0.8rem;
+  line-height: 1.5rem;
+  background: #000;
+  color: #fff;
+  font-weight: 600;
+  text-transform: capitalize;
 }

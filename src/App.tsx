@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
-import AddPage from './pages/AddPage';
+import AddUserPage from './pages/AddUserPage';
 import './styles/app.scss';
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route exact path='/login' component={LoginPage} />
-          <Route path='/add' component={AddPage} />
+          <Route path='/user/add' component={AddUserPage} />
         </Switch>
       </div>
     </Router>

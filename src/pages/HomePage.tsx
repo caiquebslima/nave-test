@@ -4,7 +4,7 @@ import { Button, Modal } from '@material-ui/core';
 import { Header, Card, ModalContent } from '../components';
 import '../styles/home-page.scss';
 import { APIService, UserResponse } from '../library';
-// import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const HomePage: React.FC<any> = () => {
   const [users, setUsers] = useState([]);
@@ -31,7 +31,12 @@ const HomePage: React.FC<any> = () => {
       <main className='people'>
         <section className='people__action-bar mb-4'>
           <h2>Navers</h2>
-          <Button variant='contained' className='nave-button'>
+          <Button
+            variant='contained'
+            className='nave-button'
+            component={Link}
+            to='/user/add'
+          >
             Adicionar Naver
           </Button>
         </section>
