@@ -4,6 +4,7 @@ import { Button, Modal } from '@material-ui/core';
 import { Header, Card, ModalContent } from '../components';
 import '../styles/home-page.scss';
 import { APIService, UserResponse } from '../library';
+// import { Link, Route } from 'react-router-dom';
 
 const HomePage: React.FC<any> = () => {
   const [users, setUsers] = useState([]);
@@ -16,9 +17,11 @@ const HomePage: React.FC<any> = () => {
   const handleClose = (): void => {
     setOpen(false);
   };
+
   useEffect(() => {
     APIService.getUsers().then((res) => {
       setUsers(res.data);
+      console.log(res.data);
     });
   }, []);
 
@@ -32,24 +35,23 @@ const HomePage: React.FC<any> = () => {
             Adicionar Naver
           </Button>
         </section>
+        {}
         <section className='people__cards row'>
-          {users.map((person: UserResponse) => {
+          {users.map((user: UserResponse) => {
             return (
-              <button
-                className='card-button col-md-3 mb-3'
-                onClick={handleOpen}
-              >
-                <Card
-                  name={person.name}
-                  job={person.job_role}
-                  photo={person.url}
-                />
-              </button>
+              <React.Fragment>
+                <button
+                  className='card-button col-md-3 mb-3'
+                  onClick={handleOpen}
+                >
+                  <Card name={user.name} job={user.job_role} photo={user.url} />
+                </button>
+                <Modal open={open} onClose={handleClose}>
+                  <ModalContent user={user} setOpen={setOpen} />
+                </Modal>
+              </React.Fragment>
             );
           })}
-          <Modal open={open} onClose={handleClose}>
-            <ModalContent />
-          </Modal>
         </section>
       </main>
     </React.Fragment>
