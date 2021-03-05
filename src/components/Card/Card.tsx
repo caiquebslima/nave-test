@@ -16,8 +16,10 @@ const Card: React.FC<CardInterface> = ({ photo, name, job }: CardInterface) => {
         <img src={photo} alt={name} />
       </figure>
       <div className='people-card__info'>
-        <p className='bold'>{name}</p>
-        <p className='light'>{job}</p>
+        <p>
+          <strong>{name}</strong>
+        </p>
+        <p>{job}</p>
       </div>
       <div className='people-card__action'>
         <Delete />

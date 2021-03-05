@@ -1,3 +1,3 @@
 export * from './Card/';
-export * from './Modal/';
+export * from './ModalContent';
 export * from './Header/';

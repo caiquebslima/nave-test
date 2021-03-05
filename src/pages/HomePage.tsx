@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal } from '@material-ui/core';
 
-import { Header, Card } from '../components';
+import { Header, Card, ModalContent } from '../components';
 import '../styles/home-page.scss';
 import { APIService, UserResponse } from '../library';
 
@@ -9,11 +9,11 @@ const HomePage: React.FC<any> = () => {
   const [users, setUsers] = useState([]);
   const [open, setOpen] = useState(false);
 
-  const handleOpen = () => {
+  const handleOpen = (): void => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setOpen(false);
   };
   useEffect(() => {
@@ -35,24 +35,21 @@ const HomePage: React.FC<any> = () => {
         <section className='people__cards row'>
           {users.map((person: UserResponse) => {
             return (
-              <React.Fragment>
-                <button className='card-button col-lg-3' onClick={handleOpen}>
-                  <Card
-                    name={person.name}
-                    job={person.job_role}
-                    photo={person.url}
-                  />
-                </button>
-                <Modal open={open} onClose={handleClose}>
-                  <Card
-                    name={person.name}
-                    job={person.job_role}
-                    photo={person.url}
-                  />
-                </Modal>
-              </React.Fragment>
+              <button
+                className='card-button col-md-3 mb-3'
+                onClick={handleOpen}
+              >
+                <Card
+                  name={person.name}
+                  job={person.job_role}
+                  photo={person.url}
+                />
+              </button>
             );
           })}
+          <Modal open={open} onClose={handleClose}>
+            <ModalContent />
+          </Modal>
         </section>
       </main>
     </React.Fragment>
