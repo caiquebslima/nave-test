@@ -12,7 +12,6 @@ const HomePage: React.FC<any> = () => {
   useEffect(() => {
     APIService.getUsers().then((res) => {
       setUsers(res.data);
-      console.log(res.data);
     });
   }, []);
 

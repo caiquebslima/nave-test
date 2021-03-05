@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import client from './api.client';
-import { APIServiceInterface, LoginResponse } from './api.interface';
+import { APIServiceInterface } from './api.interface';
 
 export class APIServiceSingleton implements APIServiceInterface {
   public constructor() {
@@ -10,7 +10,7 @@ export class APIServiceSingleton implements APIServiceInterface {
   public login = async (
     email: string,
     password: string
-  ): Promise<AxiosResponse<LoginResponse>> => {
+  ): Promise<AxiosResponse> => {
     const data = {
       email: email,
       password: password,
@@ -33,7 +33,7 @@ export class APIServiceSingleton implements APIServiceInterface {
     admission_date: string,
     project: string,
     photoUrl: string
-  ) => {
+  ): Promise<AxiosResponse> => {
     const body = {
       name: name,
       job_role: job,
@@ -53,7 +53,7 @@ export class APIServiceSingleton implements APIServiceInterface {
     admission_date?: string,
     project?: string,
     photoUrl?: string
-  ) => {
+  ): Promise<AxiosResponse> => {
     const body = {
       name: name,
       job_role: job,

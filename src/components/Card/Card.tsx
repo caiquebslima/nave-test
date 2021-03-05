@@ -42,8 +42,8 @@ const Card: React.FC<CardInterface> = ({
           </div>
         </button>
         <div className='people-card__action'>
-          <ActionButton action={'delete'} />
-          <ActionButton action={'edit'} />
+          <ActionButton id={id} action={'delete'} />
+          <ActionButton id={id} action={'edit'} />
         </div>
       </article>
       <Modal open={open} onClose={handleClose}>

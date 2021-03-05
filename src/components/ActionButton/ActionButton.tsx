@@ -9,13 +9,16 @@ import {
   DialogTitle,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { APIService } from '../../library';
 
 interface ActionButtonProps {
   action: 'delete' | 'edit';
+  id: string;
 }
 
 const ActionButton: React.FC<ActionButtonProps> = ({
   action,
+  id,
 }: ActionButtonProps): JSX.Element => {
   const [open, setOpen] = React.useState(false);
 
@@ -44,9 +47,9 @@ const ActionButton: React.FC<ActionButtonProps> = ({
             aria-labelledby='alert-dialog-title'
             aria-describedby='alert-dialog-description'
           >
-            <DialogTitle id='alert-dialog-title'>{'Excluir Naver'}</DialogTitle>
+            <DialogTitle>{'Excluir Naver'}</DialogTitle>
             <DialogContent>
-              <DialogContentText id='alert-dialog-description'>
+              <DialogContentText>
                 Tem certeza que deseja excluir este Naver?
               </DialogContentText>
             </DialogContent>
@@ -54,7 +57,19 @@ const ActionButton: React.FC<ActionButtonProps> = ({
               <Button onClick={handleClose} color='primary'>
                 Cancelar
               </Button>
-              <Button onClick={handleClose} color='primary' autoFocus>
+              <Button
+                onClick={() => {
+                  try {
+                    APIService.deleteUser(id);
+                  } catch (e) {
+                    console.log('error', e);
+                  } finally {
+                    handleClose();
+                  }
+                }}
+                color='primary'
+                autoFocus
+              >
                 Excluir
               </Button>
             </DialogActions>
