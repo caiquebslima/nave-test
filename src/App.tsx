@@ -1,9 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
-import AddPage from './pages/AddPage';
+import AddUserPage from './pages/AddUserPage';
 import './styles/app.scss';
 
 function App() {
@@ -25,7 +25,8 @@ function App() {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route exact path='/login' component={LoginPage} />
-          <Route exact path='/add' component={AddPage} />
+          <Route exact path='/user/add' component={AddUserPage} />
+          <Route exact path='/user/:id' component={AddUserPage} />
         </Switch>
       </div>
     </Router>

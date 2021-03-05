@@ -1,8 +1,10 @@
-export type LoginResponse = {
-  email: string;
-  id: string;
-  token: string;
-};
+import { AxiosResponse } from 'axios';
+
+// export type LoginResponse = {
+//   email: string;
+//   id: string;
+//   token: string;
+// };
 
 export type UserResponse = {
   id: string;
@@ -25,9 +27,9 @@ export type DeleteResponse = {
 
 export interface APIServiceInterface {
   // signUp: (email: string, password: string) => Promise<any>;
-  login: (email: string, password: string) => Promise<LoginResponse>;
-  getUsers: () => Promise<UserResponse[]>;
-  getUser: (id: string) => Promise<UserResponse>;
+  login: (email: string, password: string) => Promise<AxiosResponse>;
+  getUsers: () => Promise<AxiosResponse>;
+  getUser: (id: string) => Promise<AxiosResponse>;
   createUser: (
     job_role: string,
     admission_date: string,
@@ -35,14 +37,15 @@ export interface APIServiceInterface {
     project: string,
     name: string,
     url: string
-  ) => Promise<UserResponse>;
+  ) => Promise<AxiosResponse>;
   updateUser: (
+    id: string,
     job_role?: string,
     admission_date?: string,
     birthdate?: string,
     project?: string,
     name?: string,
     url?: string
-  ) => Promise<UserResponse>;
-  deleteUser: (id: string) => Promise<DeleteResponse>;
+  ) => Promise<AxiosResponse>;
+  deleteUser: (id: string) => Promise<AxiosResponse>;
 }

@@ -1,0 +1,29 @@
+.form-area {
+  &__header {
+    display: flex;
+    align-items: center;
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      line-height: 2rem;
+      font-weight: 600;
+    }
+  }
+  .input-spacing {
+    margin: 1rem;
+  }
+  form {
+    padding: 1rem;
+    position: relative;
+    justify-content: flex-end;
+    .nave-button {
+      padding: 0.5rem 4rem;
+      font-size: 0.8rem;
+      line-height: 1.5rem;
+      background: #000;
+      color: #fff;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+  }
+}

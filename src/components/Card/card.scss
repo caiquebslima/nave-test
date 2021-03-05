@@ -1,0 +1,32 @@
+.people-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  button.card-button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__image {
+    padding-top: 100%;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+    }
+  }
+  &__action {
+    text-align: center;
+  }
+}

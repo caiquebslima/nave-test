@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from 'redux';
 import { persistReducer, persistStore } from 'redux-persist';
 import UserReducer from './user';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import storage from 'redux-persist/lib/storage';
 
 const rootReducer = combineReducers({
   user: UserReducer,
@@ -16,9 +16,10 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-/* eslint import/no-anonymous-default-export: [2, {"allowArrowFunction": true}] */
-export default () => {
+export const storePersistor = () => {
   let store: any = createStore(persistedReducer);
   let persistor = persistStore(store);
   return { store, persistor };
 };
+
+export default storePersistor;
