@@ -9,8 +9,16 @@ import { APIService } from '../library';
 import { useDispatch } from 'react-redux';
 import { setAuth } from '../library/store';
 
+interface LoginPageProps {
+  login: boolean;
+  setLogin: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 // TODO: apply correct type to function component
-const LoginPage: React.FC<any> = () => {
+const LoginPage: React.FC<LoginPageProps> = ({
+  login,
+  setLogin,
+}: LoginPageProps) => {
   const dispatch = useDispatch();
   const validationSchema = yup.object({
     email: yup
@@ -35,9 +43,11 @@ const LoginPage: React.FC<any> = () => {
             })
           );
           console.log(res.data);
+          setLogin(true);
         });
       } catch (e) {
         console.log('error', e);
+        setLogin(false);
       } finally {
         console.log('userhas logged in succesfully');
       }

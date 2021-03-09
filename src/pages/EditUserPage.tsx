@@ -1,16 +1,45 @@
 import React from 'react';
-import { TextField, Button } from '@material-ui/core/';
+import { TextField, Button, DialogTitle, Dialog } from '@material-ui/core/';
 import { ArrowBackIos } from '@material-ui/icons';
 import * as yup from 'yup';
 
 import '../styles/add-user-page.scss';
 import { Header } from '../components';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { APIService } from '../library';
 import { useFormik } from 'formik';
 
 // TODO: apply correct type to function component
 const EditUserPage: React.FC<any> = () => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  let params: { id: string } = useParams();
+  const [user, setUser] = React.useState({
+    id: '',
+    name: '',
+    admission_date: '',
+    job_role: '',
+    user_id: '',
+    project: '',
+    birthdate: '',
+    url: '',
+  });
+
+  React.useEffect(() => {
+    APIService.getUser(params.id).then((res) => {
+      console.log(res.data);
+      setUser(res.data);
+    });
+  }, [params]);
+
   const validationSchema = yup.object({
     name: yup.string(),
     job_role: yup.string(),
@@ -21,17 +50,19 @@ const EditUserPage: React.FC<any> = () => {
   });
   const formik = useFormik({
     initialValues: {
-      name: '',
-      job_role: '',
-      birthdate: '',
-      admission_date: '',
-      project: '',
-      url: '',
+      name: user.name,
+      job_role: user.job_role,
+      birthdate: user.birthdate,
+      admission_date: user.admission_date,
+      project: user.project,
+      url: user.url,
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
+        console.log(values);
         APIService.updateUser(
+          params.id,
           values.name,
           values.job_role,
           values.birthdate,
@@ -42,6 +73,7 @@ const EditUserPage: React.FC<any> = () => {
       } catch (e) {
         console.log('error', e);
       } finally {
+        handleClickOpen();
         console.log('user created sucessfully');
       }
     },
@@ -147,6 +179,15 @@ const EditUserPage: React.FC<any> = () => {
           <Button type='submit' className=' nave-button mb-4 mr-4'>
             Salvar
           </Button>
+          <Dialog
+            onClose={handleClose}
+            aria-labelledby='simple-dialog-title'
+            open={open}
+          >
+            <DialogTitle id='simple-dialog-title'>
+              Naver atualizado com sucesso
+            </DialogTitle>
+          </Dialog>
         </form>
       </main>
     </React.Fragment>

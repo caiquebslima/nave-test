@@ -2,7 +2,7 @@ import { UserInterface } from '../api';
 export const Types = {
   SET_AUTH: 'auth/SET_AUTH',
   SET_USER: 'user/SET_USER',
-  SET_USERS: 'user/SET_USERS',
+  SET_ACTIVE_USERS: 'user/SET_ACTIVE_USERS',
 };
 
 type AuthType = {
@@ -30,6 +30,7 @@ const initialState: UserStateInterface = {
     admission_date: '',
     birthdate: '',
     user_id: '',
+    id: '',
     project: '',
     url: '',
   },
@@ -71,11 +72,12 @@ export default function reducer(
           admission_date,
           birthdate,
           user_id,
+          id,
           project,
           url,
         },
       };
-    case Types.SET_USERS:
+    case Types.SET_ACTIVE_USERS:
       const { users } = action.payload;
 
       return {
@@ -99,9 +101,9 @@ export function setUser(payload: UserInterface) {
     payload,
   };
 }
-export function setUsers(payload: UserInterface) {
+export function setActiveUsers(payload: UserInterface) {
   return {
-    type: Types.SET_USERS,
+    type: Types.SET_ACTIVE_USERS,
     payload,
   };
 }

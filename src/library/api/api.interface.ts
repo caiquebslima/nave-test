@@ -11,6 +11,7 @@ export type UserInterface = {
   admission_date: string;
   job_role: string;
   user_id: string;
+  id: string;
   project: string;
   birthdate: string;
   url: string;

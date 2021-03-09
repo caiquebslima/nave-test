@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 import { Header, Card } from '../components';
 import '../styles/home-page.scss';
 import { APIService, UserInterface } from '../library';
-import { setUser } from '../library/store';
+// import { setActiveUsers } from '../library/store';
 
 const HomePage: React.FC<any> = () => {
-  const [users2, setUsers2] = useState([]);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     APIService.getUsers().then((res) => {
-      dispatch(
-        setUser({
-          ...res.data,
-        })
-      );
-      console.log(res.data);
-      setUsers2(res.data);
+      // dispatch(
+      //   setActiveUsers({
+      //     ...res.data,
+      //   })
+      // );
+      setUsers(res.data);
     });
-  }, [dispatch]);
+  }, []);
 
   return (
     <React.Fragment>
@@ -41,11 +40,11 @@ const HomePage: React.FC<any> = () => {
         </section>
         {}
         <section className='people__cards row'>
-          {users2.map((user: UserInterface) => {
+          {users?.map((user: UserInterface) => {
+            console.log('user:', user);
             return (
               <Card
-                key={user.user_id}
-                id={user.user_id}
+                id={user.id}
                 name={user.name}
                 job={user.job_role}
                 photo={user.url}
