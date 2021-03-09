@@ -11,11 +11,11 @@ export class APIServiceSingleton implements APIServiceInterface {
     email: string,
     password: string
   ): Promise<AxiosResponse> => {
-    const data = {
+    const body = {
       email: email,
       password: password,
     };
-    return await client.post('/login', data);
+    return await client.post('users/login', body);
   };
 
   public getUsers = async (): Promise<AxiosResponse> => {
@@ -42,7 +42,7 @@ export class APIServiceSingleton implements APIServiceInterface {
       project: project,
       url: photoUrl,
     };
-    return await client.post('/create', body);
+    return await client.post('/navers', body);
   };
 
   public updateUser = async (

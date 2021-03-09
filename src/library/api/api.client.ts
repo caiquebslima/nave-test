@@ -10,6 +10,7 @@ client.interceptors.request.use((config) => {
 
   config.headers = {
     ...config.headers,
+    'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`,
   };
 
