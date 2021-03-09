@@ -1,19 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { Header, Card } from '../components';
 import '../styles/home-page.scss';
-import { APIService, UserResponse } from '../library';
+import { APIService, UserInterface } from '../library';
+import { setUser } from '../library/store';
 
 const HomePage: React.FC<any> = () => {
-  const [users, setUsers] = useState([]);
+  const [users2, setUsers2] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     APIService.getUsers().then((res) => {
-      setUsers(res.data);
+      dispatch(
+        setUser({
+          ...res.data,
+        })
+      );
+      console.log(res.data);
+      setUsers2(res.data);
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <React.Fragment>
@@ -32,10 +41,11 @@ const HomePage: React.FC<any> = () => {
         </section>
         {}
         <section className='people__cards row'>
-          {users.map((user: UserResponse) => {
+          {users2.map((user: UserInterface) => {
             return (
               <Card
-                id={user.id}
+                key={user.user_id}
+                id={user.user_id}
                 name={user.name}
                 job={user.job_role}
                 photo={user.url}
@@ -48,4 +58,4 @@ const HomePage: React.FC<any> = () => {
   );
 };
 
-export default HomePage;
+export { HomePage };

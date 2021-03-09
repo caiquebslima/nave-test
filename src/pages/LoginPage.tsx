@@ -6,9 +6,12 @@ import { useFormik } from 'formik';
 import { NaveLogo } from '../assets';
 import '../styles/login-page.scss';
 import { APIService } from '../library';
+import { useDispatch } from 'react-redux';
+import { setAuth } from '../library/store';
 
 // TODO: apply correct type to function component
 const LoginPage: React.FC<any> = () => {
+  const dispatch = useDispatch();
   const validationSchema = yup.object({
     email: yup
       .string()
@@ -25,9 +28,14 @@ const LoginPage: React.FC<any> = () => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        APIService.login(values.email, values.password).then((res) =>
-          console.log(res.data)
-        );
+        APIService.login(values.email, values.password).then((res) => {
+          dispatch(
+            setAuth({
+              ...res.data,
+            })
+          );
+          console.log(res.data);
+        });
       } catch (e) {
         console.log('error', e);
       } finally {
@@ -75,4 +83,4 @@ const LoginPage: React.FC<any> = () => {
   );
 };
 
-export default LoginPage;
+export { LoginPage };

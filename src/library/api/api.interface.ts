@@ -6,8 +6,7 @@ import { AxiosResponse } from 'axios';
 //   token: string;
 // };
 
-export type UserResponse = {
-  id: string;
+export type UserInterface = {
   name: string;
   admission_date: string;
   job_role: string;
