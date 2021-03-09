@@ -4,6 +4,18 @@ import { APIServiceInterface } from './api.interface';
 
 export class APIServiceSingleton implements APIServiceInterface {
   public constructor() {
+    client.interceptors.request.use((config) => {
+      const token =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVhNDRhODVmLTNlNmItNDQ0My05ZjY2LTFkOTc0YzQ5ODkwMCIsImVtYWlsIjoidGVzdGluZy11c2VyQG5hdmUucnMiLCJpYXQiOjE2MTQ4MjMyNzN9.CbP_fjTUPDz6LzyNLahX8oU-kJg__fFoHfk4eW9_-i4';
+
+      config.headers = {
+        ...config.headers,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      };
+
+      return config;
+    });
     console.log('APIService has started');
   }
 
@@ -11,11 +23,11 @@ export class APIServiceSingleton implements APIServiceInterface {
     email: string,
     password: string
   ): Promise<AxiosResponse> => {
-    const data = {
+    const body = {
       email: email,
       password: password,
     };
-    return await client.post('/login', data);
+    return await client.post('users/login', body);
   };
 
   public getUsers = async (): Promise<AxiosResponse> => {
@@ -42,7 +54,7 @@ export class APIServiceSingleton implements APIServiceInterface {
       project: project,
       url: photoUrl,
     };
-    return await client.post('/create', body);
+    return await client.post('/navers', body);
   };
 
   public updateUser = async (

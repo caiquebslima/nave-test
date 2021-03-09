@@ -58,12 +58,10 @@
           right: 0;
           bottom: initial;
         }
-        button {
-          margin-right: 0.5rem;
+        svg {
           cursor: pointer;
-          @media (max-width: 768px) {
-            transform: scale(1.5);
-          }
+          margin: 0 0.75rem;
+          transform: scale(1.3);
         }
       }
     }

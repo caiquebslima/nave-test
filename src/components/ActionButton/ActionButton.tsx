@@ -33,7 +33,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   switch (action) {
     case 'edit':
       return (
-        <Link to={'/user/:id/edit'}>
+        <Link to={`/user/${id}/edit`}>
           <Edit />
         </Link>
       );
@@ -44,20 +44,27 @@ const ActionButton: React.FC<ActionButtonProps> = ({
           <Dialog
             open={open}
             onClose={handleClose}
+            className={'p-3'}
             aria-labelledby='alert-dialog-title'
             aria-describedby='alert-dialog-description'
           >
-            <DialogTitle>{'Excluir Naver'}</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
+            <DialogTitle className={'p-3 mx-3'}>{'Excluir Naver'}</DialogTitle>
+            <DialogContent className={'p-3 mx-3'}>
+              <DialogContentText className={'px-2'}>
                 Tem certeza que deseja excluir este Naver?
               </DialogContentText>
             </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} color='primary'>
+            <DialogActions className={'mx-3 p-3'}>
+              <Button
+                style={{ backgroundColor: '#fff', color: '#000' }}
+                className={'nave-button'}
+                onClick={handleClose}
+                color='primary'
+              >
                 Cancelar
               </Button>
               <Button
+                className={'nave-button'}
                 onClick={() => {
                   try {
                     APIService.deleteUser(id);

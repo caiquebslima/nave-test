@@ -21,6 +21,18 @@ a {
 a.nave-button {
   background: #000;
   color: #fff;
+  text-transform: capitalize;
+  min-width: 176px;
+  &:hover {
+    background: #000;
+    color: #fff;
+  }
+}
+.nave-button.MuiButton-root {
+  background: #000;
+  color: #fff;
+  text-transform: capitalize;
+  min-width: 176px;
   &:hover {
     background: #000;
     color: #fff;

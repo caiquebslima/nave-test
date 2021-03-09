@@ -28,5 +28,8 @@
   }
   &__action {
     text-align: center;
+    svg {
+      cursor: pointer;
+    }
   }
 }

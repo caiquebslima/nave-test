@@ -10,17 +10,14 @@ import { APIService } from '../library';
 import { useFormik } from 'formik';
 
 // TODO: apply correct type to function component
-const AddUserPage: React.FC<any> = () => {
+const EditUserPage: React.FC<any> = () => {
   const validationSchema = yup.object({
-    name: yup.string().required('Este é um campo obrigatório'),
-    job_role: yup.string().required('Este é um campo obrigatório'),
-    birthdate: yup.string().required('Este é um campo obrigatório'),
-    admission_date: yup.string().required('Este é um campo obrigatório'),
-    project: yup.string().required('Este é um campo obrigatório'),
-    url: yup
-      .string()
-      .url('Precisa ser uma URL válida')
-      .required('Este é um campo obrigatório'),
+    name: yup.string(),
+    job_role: yup.string(),
+    birthdate: yup.string(),
+    admission_date: yup.string(),
+    project: yup.string(),
+    url: yup.string().url('Precisa ser uma URL válida'),
   });
   const formik = useFormik({
     initialValues: {
@@ -34,7 +31,7 @@ const AddUserPage: React.FC<any> = () => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        APIService.createUser(
+        APIService.updateUser(
           values.name,
           values.job_role,
           values.birthdate,
@@ -59,7 +56,7 @@ const AddUserPage: React.FC<any> = () => {
             <Link to='/'>
               <ArrowBackIos />
             </Link>
-            <h2> Adicionar Naver</h2>
+            <h2> Editar Naver</h2>
           </div>
         </div>
 
@@ -156,4 +153,4 @@ const AddUserPage: React.FC<any> = () => {
   );
 };
 
-export { AddUserPage };
+export { EditUserPage };

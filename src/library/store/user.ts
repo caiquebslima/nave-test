@@ -1,51 +1,107 @@
+import { UserInterface } from '../api';
 export const Types = {
-  SET_USER: 'auth/SET_USER',
+  SET_AUTH: 'auth/SET_AUTH',
+  SET_USER: 'user/SET_USER',
+  SET_USERS: 'user/SET_USERS',
 };
 
-type InitialStateType = {
+type AuthType = {
   email: string;
   id: string;
   token: string;
 };
 
-interface ReducerType {
-  user: InitialStateType;
+interface UserStateInterface {
+  auth: AuthType;
+  user: UserInterface;
+  users: UserInterface[];
 }
 
 // Reducer
-const initialState: ReducerType = {
-  user: {
+const initialState: UserStateInterface = {
+  auth: {
     email: '',
     id: '',
     token: '',
   },
+  user: {
+    name: '',
+    job_role: '',
+    admission_date: '',
+    birthdate: '',
+    user_id: '',
+    project: '',
+    url: '',
+  },
+  users: [],
 };
 
 export default function reducer(
   state = initialState,
   action: { type: any; payload: any }
-): ReducerType {
+): UserStateInterface {
   switch (action.type) {
-    case Types.SET_USER:
+    case Types.SET_AUTH:
       const { email, id, token } = action.payload;
-
       return {
         ...state,
-        user: {
+        auth: {
           email,
           id,
           token,
         },
       };
 
+    case Types.SET_USER:
+      const {
+        name,
+        job_role,
+        admission_date,
+        birthdate,
+        user_id,
+        project,
+        url,
+      } = action.payload;
+
+      return {
+        ...state,
+        user: {
+          name,
+          job_role,
+          admission_date,
+          birthdate,
+          user_id,
+          project,
+          url,
+        },
+      };
+    case Types.SET_USERS:
+      const { users } = action.payload;
+
+      return {
+        ...state,
+        ...users,
+      };
     default:
       return state;
   }
 }
 
-export function setUser(payload: InitialStateType) {
+export function setAuth(payload: AuthType) {
+  return {
+    type: Types.SET_AUTH,
+    payload,
+  };
+}
+export function setUser(payload: UserInterface) {
   return {
     type: Types.SET_USER,
+    payload,
+  };
+}
+export function setUsers(payload: UserInterface) {
+  return {
+    type: Types.SET_USERS,
     payload,
   };
 }
