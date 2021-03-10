@@ -6,9 +6,8 @@ import * as yup from 'yup';
 import '../styles/add-user-page.scss';
 import { Header } from '../components';
 import { Link, useParams } from 'react-router-dom';
-import { APIService, setActiveUsers } from '../library';
+import { APIService } from '../library';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
 
 // TODO: apply correct type to function component
 const EditUserPage: React.FC<any> = () => {

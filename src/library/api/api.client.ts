@@ -8,7 +8,6 @@ const client = Axios.create({
 client.interceptors.request.use(async (config) => {
   const state = await store?.getState();
   const token = await state.user.auth.token;
-  console.log(token);
   config.headers = {
     ...config.headers,
     'Content-Type': 'application/json',
