@@ -42,7 +42,6 @@ export default function reducer(
       };
     case Types.SET_ACTIVE_USERS:
       const users: [] = action.payload;
-
       return { ...state, users: [...users] };
     default:
       return state;

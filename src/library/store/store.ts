@@ -24,10 +24,7 @@ declare global {
 const composeEnhancers =
   (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export const storePersistor = () => {
-  let store: any = createStore(persistedReducer, composeEnhancers());
-  let persistor = persistStore(store);
-  return { store, persistor };
-};
+const store: any = createStore(persistedReducer, composeEnhancers());
+const persistor = persistStore(store);
 
-export default storePersistor;
+export { store, persistor };

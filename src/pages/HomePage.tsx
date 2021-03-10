@@ -17,7 +17,7 @@ const HomePage: React.FC<any> = () => {
     APIService.getUsers().then((res) => {
       dispatch(setActiveUsers(res.data));
     });
-  }, [dispatch]);
+  }, []);
 
   return (
     <React.Fragment>
@@ -37,7 +37,6 @@ const HomePage: React.FC<any> = () => {
         {}
         <section className='people__cards row'>
           {users?.map((user: UserInterface) => {
-            console.log('user:', user);
             return (
               <Card
                 key={user.id}
