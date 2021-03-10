@@ -36,7 +36,7 @@ const HomePage: React.FC<any> = () => {
         </section>
         {}
         <section className='people__cards row'>
-          {users.map((user: UserInterface) => {
+          {users?.map((user: UserInterface) => {
             console.log('user:', user);
             return (
               <Card

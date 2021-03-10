@@ -22,7 +22,7 @@ function App() {
       <div className='App'>
         <Switch>
           <Route exact path='/'>
-            {login.token === '' ? <LoginPage /> : <HomePage />}
+            {login?.token === '' ? <LoginPage /> : <HomePage />}
           </Route>
           <Route exact path='/user/add' component={AddUserPage} />
           <Route exact path='/user/:id' component={EditUserPage} />
