@@ -21,7 +21,7 @@ const EditUserPage: React.FC<any> = () => {
     setOpen(false);
   };
 
-  let params: { id: string } = useParams();
+  const params: { id: string } = useParams();
   const [user, setUser] = React.useState({
     id: '',
     name: '',
@@ -32,10 +32,10 @@ const EditUserPage: React.FC<any> = () => {
     birthdate: '',
     url: '',
   });
-  console.log(user);
 
   React.useEffect(() => {
     APIService.getUser(params.id).then((res) => {
+      console.log(res.data);
       setUser(res.data);
     });
   }, []);
@@ -50,6 +50,7 @@ const EditUserPage: React.FC<any> = () => {
   });
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
       ...user,
     },
