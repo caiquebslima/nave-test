@@ -15,7 +15,6 @@ export interface StateStructure {
 
 function App() {
   const login = useSelector((state: StateStructure) => state.user.auth);
-  console.log(login);
 
   return (
     <Router>
@@ -24,8 +23,12 @@ function App() {
           <Route exact path='/'>
             {login?.token === '' ? <LoginPage /> : <HomePage />}
           </Route>
-          <Route exact path='/user/add' component={AddUserPage} />
-          <Route exact path='/user/:id' component={EditUserPage} />
+          <Route exact path='/user/add' component={AddUserPage}>
+            {login?.token === '' ? <LoginPage /> : <AddUserPage />}
+          </Route>
+          <Route exact path='/user/:id' component={EditUserPage}>
+            {login?.token === '' ? <LoginPage /> : <EditUserPage />}
+          </Route>
         </Switch>
       </div>
     </Router>
