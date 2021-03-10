@@ -33,7 +33,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   switch (action) {
     case 'edit':
       return (
-        <Link to={`/user/${id}/edit`}>
+        <Link to={`/user/${id}`}>
           <Edit />
         </Link>
       );

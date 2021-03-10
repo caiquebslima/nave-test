@@ -1,8 +1,7 @@
 import { UserInterface } from '../api';
 export const Types = {
   SET_AUTH: 'auth/SET_AUTH',
-  SET_USER: 'user/SET_USER',
-  SET_USERS: 'user/SET_USERS',
+  SET_ACTIVE_USERS: 'user/SET_ACTIVE_USERS',
 };
 
 type AuthType = {
@@ -11,10 +10,9 @@ type AuthType = {
   token: string;
 };
 
-interface UserStateInterface {
+export interface UserStateInterface {
   auth: AuthType;
-  user: UserInterface;
-  users: UserInterface[];
+  users: [];
 }
 
 // Reducer
@@ -23,15 +21,6 @@ const initialState: UserStateInterface = {
     email: '',
     id: '',
     token: '',
-  },
-  user: {
-    name: '',
-    job_role: '',
-    admission_date: '',
-    birthdate: '',
-    user_id: '',
-    project: '',
-    url: '',
   },
   users: [],
 };
@@ -51,57 +40,23 @@ export default function reducer(
           token,
         },
       };
+    case Types.SET_ACTIVE_USERS:
+      const users: [] = action.payload;
 
-    case Types.SET_USER:
-      const {
-        name,
-        job_role,
-        admission_date,
-        birthdate,
-        user_id,
-        project,
-        url,
-      } = action.payload;
-
-      return {
-        ...state,
-        user: {
-          name,
-          job_role,
-          admission_date,
-          birthdate,
-          user_id,
-          project,
-          url,
-        },
-      };
-    case Types.SET_USERS:
-      const { users } = action.payload;
-
-      return {
-        ...state,
-        ...users,
-      };
+      return { ...state, users: [...users] };
     default:
       return state;
   }
 }
-
 export function setAuth(payload: AuthType) {
   return {
     type: Types.SET_AUTH,
     payload,
   };
 }
-export function setUser(payload: UserInterface) {
+export function setActiveUsers(payload: UserInterface) {
   return {
-    type: Types.SET_USER,
-    payload,
-  };
-}
-export function setUsers(payload: UserInterface) {
-  return {
-    type: Types.SET_USERS,
+    type: Types.SET_ACTIVE_USERS,
     payload,
   };
 }

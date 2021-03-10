@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Button } from '@material-ui/core/';
+import { TextField, Button, Dialog, DialogTitle } from '@material-ui/core/';
 import { ArrowBackIos } from '@material-ui/icons';
 import * as yup from 'yup';
 
@@ -11,6 +11,16 @@ import { useFormik } from 'formik';
 
 // TODO: apply correct type to function component
 const AddUserPage: React.FC<any> = () => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const validationSchema = yup.object({
     name: yup.string().required('Este é um campo obrigatório'),
     job_role: yup.string().required('Este é um campo obrigatório'),
@@ -45,6 +55,7 @@ const AddUserPage: React.FC<any> = () => {
       } catch (e) {
         console.log('error', e);
       } finally {
+        handleClickOpen();
         console.log('user created sucessfully');
       }
     },
@@ -150,6 +161,15 @@ const AddUserPage: React.FC<any> = () => {
           <Button type='submit' className=' nave-button mb-4 mr-4'>
             Salvar
           </Button>
+          <Dialog
+            onClose={handleClose}
+            aria-labelledby='simple-dialog-title'
+            open={open}
+          >
+            <DialogTitle id='simple-dialog-title'>
+              Naver criado com sucesso
+            </DialogTitle>
+          </Dialog>
         </form>
       </main>
     </React.Fragment>

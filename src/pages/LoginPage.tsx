@@ -28,18 +28,18 @@ const LoginPage: React.FC<any> = () => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        APIService.login(values.email, values.password).then((res) => {
-          dispatch(
-            setAuth({
-              ...res.data,
-            })
-          );
-          console.log(res.data);
-        });
+        const credentials = await APIService.login(
+          values.email,
+          values.password
+        );
+        dispatch(
+          setAuth({
+            ...credentials.data,
+          })
+        );
       } catch (e) {
-        console.log('error', e);
-      } finally {
-        console.log('userhas logged in succesfully');
+        console.log(e);
+        alert('wrong login credentials!');
       }
     },
   });

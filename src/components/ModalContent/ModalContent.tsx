@@ -14,6 +14,7 @@ const ModalContent: React.FC<ModalContentProps> = ({
   user_id,
   setOpen,
 }: ModalContentProps) => {
+  console.log(user_id);
   const [user, setUser] = React.useState({
     id: '',
     name: '',
