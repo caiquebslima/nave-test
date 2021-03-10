@@ -6,8 +6,9 @@ import * as yup from 'yup';
 import '../styles/add-user-page.scss';
 import { Header } from '../components';
 import { Link, useParams } from 'react-router-dom';
-import { APIService } from '../library';
+import { APIService, setActiveUsers } from '../library';
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
 
 // TODO: apply correct type to function component
 const EditUserPage: React.FC<any> = () => {
@@ -21,7 +22,7 @@ const EditUserPage: React.FC<any> = () => {
     setOpen(false);
   };
 
-  let params: { id: string } = useParams();
+  const params: { id: string } = useParams();
   const [user, setUser] = React.useState({
     id: '',
     name: '',
@@ -32,10 +33,10 @@ const EditUserPage: React.FC<any> = () => {
     birthdate: '',
     url: '',
   });
-  console.log(user);
 
   React.useEffect(() => {
     APIService.getUser(params.id).then((res) => {
+      console.log(res.data);
       setUser(res.data);
     });
   }, []);
@@ -50,6 +51,7 @@ const EditUserPage: React.FC<any> = () => {
   });
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
       ...user,
     },
