@@ -32,13 +32,13 @@ const EditUserPage: React.FC<any> = () => {
     birthdate: '',
     url: '',
   });
+  console.log(user);
 
   React.useEffect(() => {
     APIService.getUser(params.id).then((res) => {
-      console.log(res.data);
       setUser(res.data);
     });
-  }, [params]);
+  }, []);
 
   const validationSchema = yup.object({
     name: yup.string(),
@@ -48,14 +48,10 @@ const EditUserPage: React.FC<any> = () => {
     project: yup.string(),
     url: yup.string().url('Precisa ser uma URL válida'),
   });
+
   const formik = useFormik({
     initialValues: {
-      name: user.name,
-      job_role: user.job_role,
-      birthdate: user.birthdate,
-      admission_date: user.admission_date,
-      project: user.project,
-      url: user.url,
+      ...user,
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -91,7 +87,6 @@ const EditUserPage: React.FC<any> = () => {
             <h2> Editar Naver</h2>
           </div>
         </div>
-
         <form className='row' onSubmit={formik.handleSubmit}>
           <div className='col-md-6 p-3'>
             <TextField
@@ -100,7 +95,6 @@ const EditUserPage: React.FC<any> = () => {
               variant='outlined'
               className='mb-4'
               fullWidth={true}
-              required
               value={formik.values.name}
               onChange={formik.handleChange}
               error={formik.touched.name && Boolean(formik.errors.name)}
@@ -112,7 +106,6 @@ const EditUserPage: React.FC<any> = () => {
               variant='outlined'
               className='mb-4'
               fullWidth={true}
-              required
               value={formik.values.birthdate}
               onChange={formik.handleChange}
               error={
@@ -126,7 +119,6 @@ const EditUserPage: React.FC<any> = () => {
               variant='outlined'
               className='mb-4'
               fullWidth={true}
-              required
               value={formik.values.project}
               onChange={formik.handleChange}
               error={formik.touched.project && Boolean(formik.errors.project)}
@@ -140,7 +132,6 @@ const EditUserPage: React.FC<any> = () => {
               variant='outlined'
               className='mb-4'
               fullWidth={true}
-              required
               value={formik.values.job_role}
               onChange={formik.handleChange}
               error={formik.touched.job_role && Boolean(formik.errors.job_role)}
@@ -152,7 +143,6 @@ const EditUserPage: React.FC<any> = () => {
               variant='outlined'
               className='mb-4'
               fullWidth={true}
-              required
               value={formik.values.admission_date}
               onChange={formik.handleChange}
               error={
@@ -169,7 +159,6 @@ const EditUserPage: React.FC<any> = () => {
               variant='outlined'
               className='mb-4'
               fullWidth={true}
-              required
               value={formik.values.url}
               onChange={formik.handleChange}
               error={formik.touched.url && Boolean(formik.errors.url)}
